@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Moja Strona z Jasno Brązowym Tłem i Czcionką Source Sans Pro</title>
+    <title>Moja Strona z Zegarem i Pogodą</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -17,12 +17,18 @@
             font-size: 48px;
             color: #333;
         }
+        #weather {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Witaj na mojej stronie!</h1>
     <p>Aktualny czas:</p>
     <div id="clock"></div>
+    <div id="weather">Ładowanie pogody...</div>
     
     <script>
         function updateClock() {
@@ -41,11 +47,31 @@
             document.getElementById('clock').innerText = timeString;
         }
 
+        function updateWeather() {
+            var apiKey = '24b45c47c681a0bc631d42330e1e06f7'; // Klucz API z OpenWeatherMap
+            var city = 'Toruń'; // Zmienione na Toruń
+            var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pl`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var temperature = data.main.temp;
+                    var weatherDescription = data.weather[0].description;
+                    var weatherString = `Pogoda w ${city}: ${temperature}°C, ${weatherDescription}`;
+                    document.getElementById('weather').innerText = weatherString;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('weather').innerText = 'Nie udało się załadować pogody.';
+                });
+        }
+
         // Aktualizuj zegar co sekundę
         setInterval(updateClock, 1000);
 
-        // Zaktualizuj zegar natychmiast po załadowaniu strony
+        // Zaktualizuj zegar i pogodę natychmiast po załadowaniu strony
         updateClock();
+        updateWeather();
     </script>
 </body>
 </html>
