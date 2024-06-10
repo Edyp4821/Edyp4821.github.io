@@ -1,13 +1,15 @@
 <!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Moja Strona z Jasno Brązowym Tłem</title>
+    <title>Moja Strona z Jasno Brązowym Tłem i Czcionką Source Sans Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #D2B48C; /* Jasno brązowy kolor */
-            font-family: Source Sans Pro Bold    
-        , sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: bold;
             text-align: center;
             margin-top: 50px;
         }
@@ -34,7 +36,7 @@
             minutes = minutes < 10 ? '0' + minutes : minutes;
             seconds = seconds < 10 ? '0' + seconds : seconds;
             
-            var timeString = hours + ':' + minutes + ':' + minutes + ':' + seconds;
+            var timeString = hours + ':' + minutes + ':' + seconds;
             
             document.getElementById('clock').innerText = timeString;
         }
