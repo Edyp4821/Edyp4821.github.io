@@ -1,4 +1,3 @@
-<!DOCTYPE html><!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,12 +48,18 @@
 
         function updateWeather() {
             var apiKey = '24b45c47c681a0bc631d42330e1e06f7'; // Klucz API z OpenWeatherMap
-            var city = 'Toruń'; 
+            var city = 'Toruń'; // Zmienione na Toruń
             var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pl`;
 
             fetch(apiUrl)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    console.log(data); // Wyświetl otrzymane dane w konsoli
                     var temperature = data.main.temp;
                     var weatherDescription = data.weather[0].description;
                     var weatherString = `Pogoda w ${city}: ${temperature}°C, ${weatherDescription}`;
